@@ -1,13 +1,12 @@
 name: build linux kernel
 on:
-    push:
-        tags:
-            - 'v*'
+ workflow_dispatch:
 jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - name: checkout
+            - name: checkout pkgbuild file
+              id: checkout
               uses: actions/checkout@v4
               with:
                   sparse-checkout: |
@@ -23,6 +22,7 @@ jobs:
                   echo "Successfully created the following package archive"
                   echo "Package: ${{ steps.makepkg.outputs.pkgfile0 }}"
             - name: upload to release
+              id: upload
               uses: softprops/action-gh-release@v2
               with:
                   files: build/*
