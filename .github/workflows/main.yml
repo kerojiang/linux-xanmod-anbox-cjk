@@ -10,8 +10,6 @@ jobs:
             - name: PKGBUILD Action
               id: makepkg
               uses: edlanglois/pkgbuild-action@v1
-              with:
-                   pkgdir: linux-xanmodv4-anbox-cjk
             - name: Print Package Files
               run: |
                   echo "Successfully created the following package archive"
