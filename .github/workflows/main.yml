@@ -6,10 +6,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: checkout pkgbuild file
-              id: checkout
               uses: actions/checkout@v4
-              with:
-                path: main
             - name: build and check
               id: makepkg
               uses: edlanglois/pkgbuild-action@v1
