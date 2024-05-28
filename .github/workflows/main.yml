@@ -5,11 +5,11 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - name: checkout pkgbuild file
-              uses: actions/checkout@v4
-            - name: build and check
+            - name: Checkout
+              uses: actions/checkout@v4.1.5
+            - name: PKGBUILD Action
               id: makepkg
-              uses: edlanglois/pkgbuild-action@v1
+              uses: ouuan/pkgbuild-action@v1.2.0
             - name: Print Package Files
               run: |
                   echo "Successfully created the following package archive"
