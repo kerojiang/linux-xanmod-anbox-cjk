@@ -9,7 +9,7 @@ jobs:
               uses: actions/checkout@v4
             - name: PKGBUILD Action
               id: makepkg
-              uses: ouuan/pkgbuild-action@v1
+              uses: edlanglois/pkgbuild-action@v1
               with:
                    pkgdir: main
             - name: Print Package Files
