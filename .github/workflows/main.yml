@@ -6,19 +6,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
-              uses: actions/checkout@v4.1.5
-            - name: PKGBUILD Action
-              id: makepkg
-              uses: ouuan/pkgbuild-action@v1.2.0
-              with:
-                   pkgdir: linux-xanmodv4-anbox-cjk
-            - name: Print Package Files
-              run: |
-                  echo "Successfully created the following package archive"
-                  echo "Package: ${{ steps.makepkg.outputs.pkgfile0 }}"
-            - name: upload to release
-              id: upload
-              uses: actions/upload-artifact@v4
-              with:
-                  files: build/*
-                  fail_on_unmatched_files: true
+              uses: actions/checkout@v4
