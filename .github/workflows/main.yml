@@ -10,13 +10,15 @@ jobs:
             - name: PKGBUILD Action
               id: makepkg
               uses: ouuan/pkgbuild-action@v1.2.0
+              with:
+                   pkgdir: linux-xanmodv4-anbox-cjk
             - name: Print Package Files
               run: |
                   echo "Successfully created the following package archive"
                   echo "Package: ${{ steps.makepkg.outputs.pkgfile0 }}"
             - name: upload to release
               id: upload
-              uses: softprops/action-gh-release@v2
+              uses: actions/upload-artifact@v4
               with:
                   files: build/*
                   fail_on_unmatched_files: true
