@@ -7,3 +7,18 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v4
+            - name: PKGBUILD Action
+              id: makepkg
+              uses: ouuan/pkgbuild-action@v1
+              with:
+                   pkgdir: main
+            - name: Print Package Files
+              run: |
+                  echo "Successfully created the following package archive"
+                  echo "Package: ${{ steps.makepkg.outputs.pkgfile0 }}"
+            - name: upload to release
+              id: upload
+              uses: actions/upload-artifact@v4
+              with:
+                  files: build/*
+                  fail_on_unmatched_files: true
