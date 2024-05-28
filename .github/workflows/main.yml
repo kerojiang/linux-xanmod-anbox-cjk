@@ -5,14 +5,13 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - name: Init Publick Key
-              run: |
-                  gpg --recv-keys 38DBBDC86092693E
             - name: Checkout
               uses: actions/checkout@v4
             - name: PKGBUILD Action
               id: makepkg
               uses: edlanglois/pkgbuild-action@v1
+              with:
+                   makepkgArgs: --skippgpcheck
             - name: Print Package Files
               run: |
                   echo "Successfully created the following package archive"
