@@ -21,3 +21,7 @@ use_tracers=n
 \_config=config_x86-64-v4
 
 使用：makepkg -sficC
+
+遇到证书问题：
+
+gpg --recv-keys 38DBBDC86092693E
