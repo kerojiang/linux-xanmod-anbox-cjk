@@ -7,7 +7,7 @@ jobs:
         steps:
             - name: Init Publick Key
               run: |
-                  gpg --recv-keys 79BE3E4300411886
+                  gpg --recv-keys 38DBBDC86092693E
             - name: Checkout
               uses: actions/checkout@v4
             - name: PKGBUILD Action
