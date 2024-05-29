@@ -15,15 +15,10 @@ jobs:
               uses: edlanglois/pkgbuild-action@v1
               with:
                    makepkgArgs: --skippgpcheck -sfcC
-            - name: Print Package Files
-              run: |
-                  echo "Successfully created the following package archive"
-                  echo "Package: ${{ steps.makepkg.outputs.pkgfile0 }}"
             - name: upload 
-              uses: Shopify/upload-to-release@v1
+              uses: svenstaro/upload-release-action@v2
               with:
-                   name: update linux kernel
-                   path: | 
+                   file: | 
                     ${{ steps.makepkg.outputs.pkgfile0 }}
                     ${{ steps.makepkg.outputs.pkgfile1 }}
-                   repo-token: ${{ secrets.GITHUB_TOKEN }}
+                   overwrite: true
