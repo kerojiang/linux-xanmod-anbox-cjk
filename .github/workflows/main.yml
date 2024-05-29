@@ -5,7 +5,7 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout
+            - name: checkout
               uses: actions/checkout@v4
             - name: clean
               run: |
@@ -19,9 +19,11 @@ jobs:
               run: |
                   echo "Successfully created the following package archive"
                   echo "Package: ${{ steps.makepkg.outputs.pkgfile0 }}"
-            - name: upload to release
-              id: upload
-              uses: actions/upload-artifact@v4
+            - name: upload 
+              uses: Shopify/upload-to-release@v1
               with:
-                  files: build/*
-                  fail_on_unmatched_files: true
+                   name: update linux kernel
+                   path: | 
+                    ${{ steps.makepkg.outputs.pkgfile0 }}
+                    ${{ steps.makepkg.outputs.pkgfile1 }}
+                   repo-token: ${{ secrets.GITHUB_TOKEN }}
