@@ -7,11 +7,14 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v4
+            - name: clean
+              run: |
+                  rm -rf /opt/hostedtoolcache
             - name: PKGBUILD Action
               id: makepkg
               uses: edlanglois/pkgbuild-action@v1
               with:
-                   makepkgArgs: --skippgpcheck
+                   makepkgArgs: --skippgpcheck -sfcC
             - name: Print Package Files
               run: |
                   echo "Successfully created the following package archive"
