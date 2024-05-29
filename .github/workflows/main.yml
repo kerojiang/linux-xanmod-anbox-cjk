@@ -9,10 +9,20 @@ jobs:
         steps:
             - name: checkout
               uses: actions/checkout@v4
+            - name: clean
+              run: |
+                  rm -rf /opt/hostedtoolcache
+            - name: PKGBUILD Action
+              id: makepkg
+              uses: edlanglois/pkgbuild-action@v1
+              with:
+                   makepkgArgs: --skippgpcheck -sfcC
             - name: upload 
               uses: svenstaro/upload-release-action@v2
               with:
                    repo_token: ${{ secrets.GITHUB_TOKEN }}
                    tag: ${{ github.ref }}
-                   file: README.md
+                   file: | 
+                    ${{ steps.makepkg.outputs.pkgfile0 }}
+                    ${{ steps.makepkg.outputs.pkgfile1 }}
                    overwrite: true
