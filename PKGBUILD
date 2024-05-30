@@ -1,33 +1,35 @@
-# Maintainer: zxp19821005 <zxp19821005 at 163 dot com>
-pkgname=implay-bin
-_pkgname=ImPlay
-pkgver=1.5.1
-pkgrel=3
-pkgdesc="Desktop media player built on top of mpv and imgui"
-arch=('x86_64')
-url="https://tsl0922.github.io/ImPlay"
-_ghurl="https://github.com/tsl0922/ImPlay"
-license=('GPL-2.0-only')
-provides=("${pkgname%-bin}=${pkgver}")
-conflicts=("${pkgname%-bin}")
-depends=(
-    'gtk3'
-    'freetype2'
-    'mpv'
-    'glfw-x11'
-)
-source=(
-    "${pkgname%-bin}-${pkgver}.deb::${_ghurl}/releases/download/${pkgver}/${_pkgname}-${pkgver}-Linux.deb"
-)
-sha256sums=('ecd8137b7b4dcda7b59280728829131325bfb38762cce87db5c3bd43847f226a')
-build() {
-    bsdtar -xf "${srcdir}/data."*
-    sed "s|${_pkgname} %U|${pkgname%-bin} %U|g" -i "${srcdir}/usr/share/applications/${pkgname%-bin}.desktop"
+# Maintainer: Simon Brulhart <simon@brulhart.me>
+# Contributor: Suhaimi Ghazali <serdotlinecho@gmail.com>
+# Contributor: Patrick Griffis <tingping@tingping.se>
+
+pkgname=celluloid-git
+pkgver=0.26.r2.g00c8032
+pkgrel=1
+pkgdesc="Simple GTK+ frontend for mpv"
+arch=('i686' 'x86_64')
+url="https://celluloid-player.github.io/"
+license=('GPL3')
+depends=('gtk4' 'libadwaita' 'mpv')
+makedepends=('git' 'meson')
+optdepends=('youtube-dl: for video-sharing websites playback')
+conflicts=('celluloid')
+provides=('celluloid')
+source=("$pkgname::git+https://github.com/celluloid-player/celluloid.git")
+md5sums=('SKIP')
+
+pkgver() {
+    cd "$pkgname"
+    git describe --long --tags | sed -r 's/^v//;s/([^-]*-g)/r\1/;s/-/./g'
 }
+
+build() {
+    cd "$pkgname"
+    rm -rf _build
+    /usr/bin/meson _build --buildtype=release --prefix=/usr
+    ninja -C _build
+}
+
 package() {
-    install -Dm755 "${srcdir}/usr/bin/${_pkgname}" "${pkgdir}/usr/bin/${pkgname%-bin}"
-    install -Dm755 -d "${pkgdir}/usr/lib"
-    ln -sf "/usr/lib/libmpv.so" "${pkgdir}/usr/lib/libmpv.so.1"
-    install -Dm644 "${srcdir}/usr/share/applications/${pkgname%-bin}.desktop" -t "${pkgdir}/usr/share/applications"
-    install -Dm644 "${srcdir}/usr/share/pixmaps/${pkgname%-bin}.png" -t "${pkgdir}/usr/share/pixmaps"
+    cd "$pkgname"
+    env DESTDIR="$pkgdir" ninja -C _build install
 }
