@@ -22,6 +22,5 @@ jobs:
               with:
                    repo_token: ${{ secrets.GITHUB_TOKEN }}
                    tag: ${{ github.ref }}
-                   file: | 
-                    ${{ steps.makepkg.outputs.pkgfile0 }},${{ steps.makepkg.outputs.pkgfile1 }}
+                   file: linux-xanmod-anbox-cjk-*
                    overwrite: true
