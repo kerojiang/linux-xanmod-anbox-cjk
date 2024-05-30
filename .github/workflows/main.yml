@@ -23,5 +23,5 @@ jobs:
                    repo_token: ${{ secrets.GITHUB_TOKEN }}
                    tag: ${{ github.ref }}
                    file: | 
-                    ${{ steps.makepkg.outputs.pkgfile0 }}
+                    ${{ steps.makepkg.outputs.pkgfile0 }},${{ steps.makepkg.outputs.pkgfile1 }}
                    overwrite: true
