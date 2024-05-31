@@ -133,7 +133,7 @@ export KBUILD_BUILD_USER=${KBUILD_BUILD_USER:-makepkg}
 export KBUILD_BUILD_TIMESTAMP=${KBUILD_BUILD_TIMESTAMP:-$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EPOCH})}
 
 prepare() {
-  cd linux-${_major}
+  cd linux-${pkgver}
 
   # Apply Xanmod patch
   patch -Np1 -i ../patch-${pkgver}-xanmod${xanmod}${_revision}
