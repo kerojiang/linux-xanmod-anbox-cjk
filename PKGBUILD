@@ -107,7 +107,7 @@ fi
 options=('!strip')
 _srcname="linux-${pkgver}-xanmod${xanmod}"
 
-source=("https://cdn.kernel.org/pub/linux/kernel/v${_branch}/linux-${pkgver}.tar."{xz,sign}
+source=("https://cdn.kernel.org/pub/linux/kernel/v${_branch}/linux-${_major}.tar."{xz,sign}
         "patch-${pkgver}-xanmod${xanmod}${_revision}.xz::https://sourceforge.net/projects/xanmod/files/releases/${_sf_branch}/${pkgver}-xanmod${xanmod}/patch-${pkgver}-xanmod${xanmod}.xz"
         "https://raw.githubusercontent.com/bigshans/cjktty-patches/master/v${_branch}/cjktty-${_cjk_major}.patch")
 
@@ -123,7 +123,7 @@ for _patch in ${_patches[@]}; do
     source+=("${_patch}::https://raw.githubusercontent.com/archlinux/svntogit-packages/${_commit}/trunk/${_patch}")
 done
 
-sha256sums=('c321c46401368774fc236f57095b205a5da57415f9a6008018902f9fd5eddfae'
+sha256sums=('24fa01fb989c7a3e28453f117799168713766e119c5381dac30115f18f268149'
             'SKIP'
             '96c10d32ba2b1ad0043c90d88337793237a426001985a9ca6b53bfb107ac1d80'
             '6714bf3968392e29f19e44514d490ad7ec718c3897003210fd1e499017dd429d')
@@ -133,7 +133,7 @@ export KBUILD_BUILD_USER=${KBUILD_BUILD_USER:-makepkg}
 export KBUILD_BUILD_TIMESTAMP=${KBUILD_BUILD_TIMESTAMP:-$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EPOCH})}
 
 prepare() {
-  cd linux-${pkgver}
+  cd linux-${_major}
 
   # Apply Xanmod patch
   patch -Np1 -i ../patch-${pkgver}-xanmod${xanmod}${_revision}
@@ -198,7 +198,7 @@ prepare() {
   fi
 
   # Let's user choose microarchitecture optimization in GCC
-  #sh ${srcdir}/choose-gcc-optimization.sh $_microarchitecture
+  sh ${srcdir}/choose-gcc-optimization.sh $_microarchitecture
 
   # This is intended for the people that want to build this package with their own config
   # Put the file "myconfig" at the package folder (this will take preference) or "${XDG_CONFIG_HOME}/linux-xanmod/myconfig"
@@ -298,7 +298,7 @@ _package-headers() {
 
   # add objtool for external module building and enabled VALIDATION_STACK option
   install -Dt "$builddir/tools/objtool" tools/objtool/objtool
-
+  
   # required when DEBUG_INFO_BTF_MODULES is enabled
   if [ -f "tools/bpf/resolve_btfids/resolve_btfids" ]; then install -Dt "$builddir/tools/bpf/resolve_btfids" tools/bpf/resolve_btfids/resolve_btfids ; fi
 
@@ -375,4 +375,3 @@ for _p in "${pkgname[@]}"; do
 done
 
 # vim:set ts=8 sts=2 sw=2 et:
-
