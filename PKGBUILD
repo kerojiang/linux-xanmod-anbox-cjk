@@ -78,14 +78,14 @@ _makenconfig=
 
 pkgbase=linux-xanmod-anbox-cjk
 _major=6.9
-pkgver=${_major}.3
+pkgver=${_major}.4
 _branch=6.x
 xanmod=1
 _revision=
 _sf_branch=main
 _cjk_major=6.9
 pkgrel=${xanmod}
-pkgdesc='Linux Xanmod. Development branch with the Task Type CPU Scheduler by Hamad Al Marri'
+pkgdesc='Linux Xanmod - Stable Mainline'
 url="http://www.xanmod.org/"
 arch=(x86_64)
 
@@ -125,7 +125,7 @@ done
 
 sha256sums=('24fa01fb989c7a3e28453f117799168713766e119c5381dac30115f18f268149'
             'SKIP'
-            '96c10d32ba2b1ad0043c90d88337793237a426001985a9ca6b53bfb107ac1d80'
+            'b896d617cafe28637f2e866ef445fc05cece8b2202190ca4eaa13f8ce76f7aef'
             '6714bf3968392e29f19e44514d490ad7ec718c3897003210fd1e499017dd429d')
 
 export KBUILD_BUILD_HOST=${KBUILD_BUILD_HOST:-archlinux}
