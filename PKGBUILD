@@ -78,7 +78,7 @@ _makenconfig=
 
 pkgbase=linux-xanmod-anbox-cjk
 _major=6.9
-pkgver=${_major}.6
+pkgver=${_major}.7
 _branch=6.x
 xanmod=1
 _revision=
@@ -125,7 +125,7 @@ done
 
 sha256sums=('24fa01fb989c7a3e28453f117799168713766e119c5381dac30115f18f268149'
             'SKIP'
-            '288e6a88b2b5c73b72733045d13a56ab6f8f015f010a1a8a0e697196bb967819'
+            '235f0c325080342fed184ec3d415a865293c66a6010965b6cd3c5cfe02f2c6d9'
             '6714bf3968392e29f19e44514d490ad7ec718c3897003210fd1e499017dd429d')
 
 export KBUILD_BUILD_HOST=${KBUILD_BUILD_HOST:-archlinux}
