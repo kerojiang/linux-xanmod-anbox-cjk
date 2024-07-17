@@ -82,10 +82,10 @@ pkgver=${_major}.0
 _branch=6.x
 xanmod=1
 _revision=
-_sf_branch=main
+_sf_branch=edge
 _cjk_major=6.9
 pkgrel=${xanmod}
-pkgdesc='Linux Xanmod - Stable Mainline'
+pkgdesc='Linux Xanmod - Rolling Release'
 url="http://www.xanmod.org/"
 arch=(x86_64)
 
