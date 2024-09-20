@@ -78,7 +78,7 @@ _makenconfig=
 
 pkgbase=linux-xanmod-anbox-cjk
 _major=6.10
-pkgver=${_major}.10
+pkgver=${_major}.11
 _branch=6.x
 xanmod=1
 _revision=
@@ -109,7 +109,12 @@ _srcname="linux-${pkgver}-xanmod${xanmod}"
 
 source=("https://cdn.kernel.org/pub/linux/kernel/v${_branch}/linux-${_major}.tar."{xz,sign}
         "patch-${pkgver}-xanmod${xanmod}${_revision}.xz::https://sourceforge.net/projects/xanmod/files/releases/${_sf_branch}/${pkgver}-xanmod${xanmod}/patch-${pkgver}-xanmod${xanmod}.xz"
-        "https://raw.githubusercontent.com/bigshans/cjktty-patches/master/v${_branch}/cjktty-${_cjk_major}.patch")
+        "https://raw.githubusercontent.com/bigshans/cjktty-patches/master/v${_branch}/cjktty-${_cjk_major}.patch"
+        "https://raw.githubusercontent.com/micros24/linux-xanmod-bore/${_major}/0001-bore.patch"
+        "https://raw.githubusercontent.com/micros24/linux-xanmod-bore/${_major}/0002-glitched-cfs.patch"
+        "https://raw.githubusercontent.com/micros24/linux-xanmod-bore/${_major}/0003-glitched-eevdf-additions.patch"
+        "https://raw.githubusercontent.com/micros24/linux-xanmod-bore/${_major}/0004-o3-optimization.patch"
+)
 
 validpgpkeys=(
     'ABAF11C65A2970B130ABE3C479BE3E4300411886' # Linux Torvalds
@@ -125,8 +130,13 @@ done
 
 sha256sums=('774698422ee54c5f1e704456f37c65c06b51b4e9a8b0866f34580d86fef8e226'
             'SKIP'
-            'fbd16e0ed16215c1de1ad5999a52a9e3e70adf0c63ec7932ef9086bda61cd5e5'
-            '6714bf3968392e29f19e44514d490ad7ec718c3897003210fd1e499017dd429d')
+            '5013781cb64bb991fde758bc82ac78228cfbd275e4613cb888948bc5635c5a7d'
+            '6714bf3968392e29f19e44514d490ad7ec718c3897003210fd1e499017dd429d'
+            '49db51f319a4092c9070f0fc7fb527f9fe028b55b86281a31f0c167bbd2fdcf1' # 0001-bore.patch
+            '1f3258ce1842156fcc35ca4775f6ba50f08f8f339b8cfbc3395949bb0e368872' # 0002-glitched-cfs.patch
+            '78f508e6fccba1276ca3372f6167b54c23b3d17e52ca9170d465e43e41587999' # 0003-glitched-eevdf-additions.patch
+            'b36a0ec6bc604b9e067ebc7440411c34b64f324b5833b0b0ef861a2552c16d49' # 0004-o3-optimization.patch
+            )
 
 export KBUILD_BUILD_HOST=${KBUILD_BUILD_HOST:-archlinux}
 export KBUILD_BUILD_USER=${KBUILD_BUILD_USER:-makepkg}
