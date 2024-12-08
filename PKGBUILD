@@ -13,9 +13,9 @@
 ## Look inside 'choose-gcc-optimization.sh' to choose your microarchitecture
 ## Valid numbers between: 0 to 99
 ## Default is: 0 => generic
-## Good option if your package is for one machine: 98 (Intel native) or 99 (AMD native)
+## Good option if your package is for one machine: 98 (Intel native) or 99 (AMD native) 14 amd zen4
 if [ -z ${_microarchitecture+x} ]; then
-  _microarchitecture=99
+  _microarchitecture=14
 fi
 
 CONFIG_ASHMEM=m
@@ -78,7 +78,7 @@ _makenconfig=
 
 pkgbase=linux-xanmod-anbox-cjk
 _major=6.12
-pkgver=${_major}.1
+pkgver=${_major}.2
 _branch=6.x
 xanmod=1
 _revision=
@@ -126,7 +126,7 @@ done
 
 sha256sums=('b1a2562be56e42afb3f8489d4c2a7ac472ac23098f1ef1c1e40da601f54625eb'
             'SKIP'
-            '21f486f5ca92eead76083b1b8ba2e7464a3aec36e097c0039b53d564486aa632'
+            '9019bd683316794ad4f58b8900819dfc93f47f0f510ead18b232bf679f0d5514'
             '6714bf3968392e29f19e44514d490ad7ec718c3897003210fd1e499017dd429d'
             )
 
