@@ -77,8 +77,8 @@ _makenconfig=
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-xanmod-anbox-cjk
-_major=6.11
-pkgver=${_major}.11
+_major=6.12
+pkgver=${_major}.5
 _branch=6.x
 xanmod=1
 _revision=
@@ -124,9 +124,9 @@ for _patch in ${_patches[@]}; do
     source+=("${_patch}::https://raw.githubusercontent.com/archlinux/svntogit-packages/${_commit}/trunk/${_patch}")
 done
 
-sha256sums=('55d2c6c025ebc27810c748d66325dd5bc601e8d32f8581d9e77673529bdacb2e'
+sha256sums=('b1a2562be56e42afb3f8489d4c2a7ac472ac23098f1ef1c1e40da601f54625eb'
             'SKIP'
-            '145333123e9e2768b68e9037378fb0a6c65d85c869a29d0b79188ece63b48d54'
+            'a207c6c79dbb876fb5c8eca1efab2fa51273f545ef635e645a95a021e446ac19'
             '6714bf3968392e29f19e44514d490ad7ec718c3897003210fd1e499017dd429d'
             )
 
