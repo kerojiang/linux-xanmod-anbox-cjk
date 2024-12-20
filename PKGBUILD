@@ -103,9 +103,12 @@ makedepends=(
   tar
   xz
 )
-if [ "${_compiler}" = "clang" ]; then
-  makedepends+=(clang llvm lld python)
-fi
+
+#if [ "${_compiler}" = "clang" ]; then
+#  makedepends+=(clang llvm lld python)
+#fi
+
+
 options=('!strip')
 _srcname="linux-${pkgver}-xanmod${xanmod}"
 
