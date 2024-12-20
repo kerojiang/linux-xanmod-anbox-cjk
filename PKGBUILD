@@ -73,7 +73,7 @@ fi
 
 # Tweak kernel options prior to a build via nconfig
 #if [ -z ${_makenconfig} ]; then
-  _makenconfig=n
+#  _makenconfig=n
 #fi
 
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
