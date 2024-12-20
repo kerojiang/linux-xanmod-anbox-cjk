@@ -72,13 +72,15 @@ if [ -z ${_localmodcfg} ]; then
 fi
 
 # Tweak kernel options prior to a build via nconfig
-_makenconfig=
+if [ -z ${_makenconfig} ]; then
+  _makenconfig=n
+fi
 
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-xanmod-anbox-cjk
 _major=6.12
-pkgver=${_major}.5
+pkgver=${_major}.6
 _branch=6.x
 xanmod=1
 _revision=
@@ -126,7 +128,7 @@ done
 
 sha256sums=('b1a2562be56e42afb3f8489d4c2a7ac472ac23098f1ef1c1e40da601f54625eb'
             'SKIP'
-            'a207c6c79dbb876fb5c8eca1efab2fa51273f545ef635e645a95a021e446ac19'
+            '6dbfc1f07f2c3e165e518e8923063b807c84086fcdea51cbb9b737a9f8b01b4b'
             '6714bf3968392e29f19e44514d490ad7ec718c3897003210fd1e499017dd429d'
             )
 
