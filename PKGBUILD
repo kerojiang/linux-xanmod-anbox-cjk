@@ -72,9 +72,9 @@ if [ -z ${_localmodcfg} ]; then
 fi
 
 # Tweak kernel options prior to a build via nconfig
-if [ -z ${_makenconfig} ]; then
+#if [ -z ${_makenconfig} ]; then
   _makenconfig=n
-fi
+#fi
 
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
