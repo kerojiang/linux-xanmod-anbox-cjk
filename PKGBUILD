@@ -79,12 +79,12 @@ fi
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-xanmod-anbox-cjk
-_major=6.12
-pkgver=${_major}.6
+_major=6.13
+pkgver=${_major}.1
 _branch=6.x
 xanmod=1
 _revision=
-_sf_branch=main
+_sf_branch=edge
 _cjk_major=6.9
 pkgrel=${xanmod}
 pkgdesc='Linux Xanmod - Rolling Release'
@@ -129,9 +129,9 @@ for _patch in ${_patches[@]}; do
     source+=("${_patch}::https://raw.githubusercontent.com/archlinux/svntogit-packages/${_commit}/trunk/${_patch}")
 done
 
-sha256sums=('b1a2562be56e42afb3f8489d4c2a7ac472ac23098f1ef1c1e40da601f54625eb'
+sha256sums=('e79dcc6eb86695c6babfb07c2861912b635d5075c6cd1cd0567d1ea155f80d6e'
             'SKIP'
-            '6dbfc1f07f2c3e165e518e8923063b807c84086fcdea51cbb9b737a9f8b01b4b'
+            '272cfe4c2493f37e44b5b72cf2e277cfc3df6012a405c1563f5283321dbe53c2'
             '6714bf3968392e29f19e44514d490ad7ec718c3897003210fd1e499017dd429d'
             )
 
