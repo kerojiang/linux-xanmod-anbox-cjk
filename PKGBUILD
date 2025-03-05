@@ -75,9 +75,9 @@ if [ -z ${_localmodcfg} ]; then
 fi
 
 # Tweak kernel options prior to a build via nconfig
-if [ -z ${_makenconfig} ]; then
-  _makenconfig=n
-fi
+#if [ -z ${_makenconfig} ]; then
+#  _makenconfig=n
+#fi
 
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
@@ -107,9 +107,9 @@ makedepends=(
   xz
 )
 
-if [ "${_compiler}" = "clang" ]; then
-  makedepends+=(clang llvm lld python)
-fi
+#if [ "${_compiler}" = "clang" ]; then
+#  makedepends+=(clang llvm lld python)
+#fi
 
 
 options=('!strip')
@@ -157,7 +157,6 @@ prepare() {
   for src in "${source[@]}"; do
     src="${src%%::*}"
     src="${src##*/}"
-    src="${src%.zst}"
     [[ $src = *.patch ]] || continue
     msg2 "Applying patch $src..."
     patch -Np1 < "../$src"
@@ -202,7 +201,6 @@ prepare() {
 
   # Compress modules by default (following Arch's kernel)
   if [ "$_compress_modules" = "y" ]; then
-    scripts/config --enable CONFIG_MODULE_COMPRESS
     scripts/config --enable CONFIG_MODULE_COMPRESS_ZSTD
   fi
 
