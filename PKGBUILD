@@ -23,7 +23,8 @@ CONFIG_ANDROID=y
 CONFIG_ANDROID_BINDER_IPC=m
 CONFIG_ANDROID_BINDERFS=n
 CONFIG_ANDROID_BINDER_DEVICES="binder,hwbinder,vndbinder"
-# _compiler=clang
+
+#_compiler=clang
 
 ## Disable NUMA since most users do not have multiple processors. Breaks CUDA/NvEnc.
 ## Archlinux and Xanmod enable it by default.
@@ -44,8 +45,8 @@ fi
 # Unique compiler supported upstream is GCC
 ## Choose between GCC and CLANG config (default is GCC)
 ## Use the environment variable "_compiler=clang"
-if [ "${_compiler}" = "clang" ]; then
-  _compiler_flags="CC=clang HOSTCC=clang LLVM=1 LLVM_IAS=1"
+if [ -z ${_compiler+x} ]; then
+  _compiler=gcc
 fi
 
 # Choose between the 4 main configs for stable branch. Default x86-64-v1 which use CONFIG_GENERIC_CPU2:
@@ -74,9 +75,9 @@ if [ -z ${_localmodcfg} ]; then
 fi
 
 # Tweak kernel options prior to a build via nconfig
-#if [ -z ${_makenconfig} ]; then
-#  _makenconfig=n
-#fi
+if [ -z ${_makenconfig} ]; then
+  _makenconfig=n
+fi
 
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
@@ -169,6 +170,7 @@ prepare() {
   if [ "${_compiler}" = "clang" ]; then
     scripts/config --disable LTO_CLANG_FULL
     scripts/config --enable LTO_CLANG_THIN
+    _LLVM=1
   fi
 
   scripts/config --module  CONFIG_ASHMEM
@@ -252,7 +254,7 @@ prepare() {
 
 build() {
   cd linux-${_major}
-  make LLVM=$_LLVM LLVM_IAS=$_LLVM all -j16
+  make LLVM=$_LLVM LLVM_IAS=$_LLVM all -j$(nproc)
 }
 
 _package() {
