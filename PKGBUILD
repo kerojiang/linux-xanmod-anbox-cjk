@@ -83,7 +83,7 @@ fi
 
 pkgbase=linux-xanmod-anbox-cjk
 _major=6.13
-pkgver=${_major}.5
+pkgver=${_major}.6
 _branch=6.x
 xanmod=1
 _revision=
@@ -93,7 +93,6 @@ pkgrel=${xanmod}
 pkgdesc='Linux Xanmod - Rolling Release'
 url="http://www.xanmod.org/"
 arch=(x86_64)
-
 license=(GPL2)
 makedepends=(
   bc
@@ -134,7 +133,7 @@ done
 
 sha256sums=('e79dcc6eb86695c6babfb07c2861912b635d5075c6cd1cd0567d1ea155f80d6e'
             'SKIP'
-            'dab087e2969aaf029db35fea5f6184d28079d6daff99173b8e361417461492f0'
+            '50ac60787ff2a07e477f4e5d4344f0ccacb54acb265ad0fdbdf76f5fc9ad2811'
             '6714bf3968392e29f19e44514d490ad7ec718c3897003210fd1e499017dd429d'
             )
 
