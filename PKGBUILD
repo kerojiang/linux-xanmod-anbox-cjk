@@ -117,7 +117,7 @@ _srcname="linux-${pkgver}-xanmod${xanmod}"
 source=("https://cdn.kernel.org/pub/linux/kernel/v${_branch}/linux-${_major}.tar."{xz,sign}
 
 "patch-${pkgver}-xanmod${xanmod}${_revision}.xz::https://sourceforge.net/projects/xanmod/files/releases/${_sf_branch}/${
-pkgver}-xanmod${xanmod}/patch-${pkgver}-xanmod${xanmod}.xz/download"
+pkgver}-xanmod${xanmod}/patch-${pkgver}-xanmod${xanmod}.xz"
         "https://raw.githubusercontent.com/bigshans/cjktty-patches/master/v${_branch}/cjktty-${_cjk_major}.patch"
         choose-gcc-optimization.sh
 )
@@ -138,7 +138,7 @@ sha256sums=('a294b683e7b161bb0517bb32ec7ed1d2ea7603dfbabad135170ed12d00c47670'
             'SKIP'
             'bfabefe4c1996355c9b6da0fb0788b7943326ef9d1cbea85b3d78ea2a4502982'
             '6714bf3968392e29f19e44514d490ad7ec718c3897003210fd1e499017dd429d'
-            '252688b672d7a6982c28120a9509d63d8dda230e3a21bafd1177819ca161c88f'
+            'f1c6b2c3cbaa2e50e6d30fb7e1f19b2b0d97da360854d23b08f4e5538d120f2b'
             )
 
 export KBUILD_BUILD_HOST=${KBUILD_BUILD_HOST:-archlinux}
