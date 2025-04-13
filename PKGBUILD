@@ -83,7 +83,7 @@ fi
 
 pkgbase=linux-xanmod-anbox-cjk
 _major=6.14
-pkgver=${_major}.0
+pkgver=${_major}.2
 _branch=6.x
 xanmod=1
 _revision=
@@ -134,7 +134,7 @@ done
 
 sha256sums=('a294b683e7b161bb0517bb32ec7ed1d2ea7603dfbabad135170ed12d00c47670'
             'SKIP'
-            'bfabefe4c1996355c9b6da0fb0788b7943326ef9d1cbea85b3d78ea2a4502982'
+            'b3ee5a7c464362bb82dde6e502ab9ad353295f90d0c79e1e2a1df2b4b135ccbb'
             '6714bf3968392e29f19e44514d490ad7ec718c3897003210fd1e499017dd429d'
             'f1c6b2c3cbaa2e50e6d30fb7e1f19b2b0d97da360854d23b08f4e5538d120f2b'
             )
