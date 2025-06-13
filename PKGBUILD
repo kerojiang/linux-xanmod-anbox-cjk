@@ -82,7 +82,7 @@ fi
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-xanmod-anbox-cjk
-_major=6.14
+_major=6.14  
 pkgver=${_major}.3
 _branch=6.x
 xanmod=1
