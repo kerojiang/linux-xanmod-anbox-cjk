@@ -12,9 +12,12 @@ jobs:
             - name: clean
               run: |
                   rm -rf /opt/hostedtoolcache
+                  sudo rm -rf /github/workspace/src || true
             - name: PKGBUILD Action
               id: makepkg
               uses: edlanglois/pkgbuild-action@v1
+              env:
+                   KCFLAGS: "-Wno-discarded-qualifiers"
               with:
                    makepkgArgs: --skippgpcheck -sfcC
             - name: upload 
