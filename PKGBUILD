@@ -87,7 +87,7 @@ pkgver=${_major}.11
 _branch=6.x
 xanmod=1
 _revision=
-_sf_branch=edge
+_sf_branch=main
 _cjk_major=6.19
 pkgrel=${xanmod}
 pkgdesc='Linux Xanmod - Rolling Release'
@@ -112,10 +112,10 @@ fi
 
 
 options=('!strip')
-_srcname="linux-${pkgver}-x64v3-xanmod${xanmod}"
+_srcname="linux-${pkgver}-xanmod${xanmod}"
 
 source=("https://cdn.kernel.org/pub/linux/kernel/v${_branch}/linux-${_major}.tar."{xz,sign}
-        "patch-${pkgver}-x64v3-xanmod${xanmod}${_revision}.xz::https://sourceforge.net/projects/xanmod/files/releases/${_sf_branch}/${pkgver}-x64v3-xanmod${xanmod}/patch-${pkgver}-x64v3-xanmod${xanmod}.xz/download"
+        "patch-${pkgver}-xanmod${xanmod}${_revision}.xz::https://sourceforge.net/projects/xanmod/files/releases/${_sf_branch}/${pkgver}-xanmod${xanmod}/patch-${pkgver}-xanmod${xanmod}.xz/download"
         "https://raw.githubusercontent.com/bigshans/cjktty-patches/master/v${_branch}/cjktty-${_cjk_major}.patch"
         choose-gcc-optimization.sh
 )
@@ -147,7 +147,7 @@ prepare() {
   cd linux-${_major}
 
   # Apply Xanmod patch
-  patch -Np1 -i ../patch-${pkgver}-x64v3-xanmod${xanmod}${_revision}
+  patch -Np1 -i ../patch-${pkgver}-xanmod${xanmod}${_revision}
 
   msg2 "Setting version..."
   echo "-$pkgrel" > localversion.10-pkgrel
@@ -158,11 +158,15 @@ prepare() {
   for src in "${source[@]}"; do
     src="${src%%::*}"
     src="${src##*/}"
+    src="${src%.zst}"
     [[ $src = *.patch ]] || continue
     msg2 "Applying patch $src..."
     patch -Np1 < "../$src"
     msg2 "$src patched"
   done
+
+  # Address bug https://gitlab.com/xanmod/linux/-/issues/446
+  sed -i '/^[[:space:]]*default "6" if / s/MEMERALDRAPIDS/MEMERALDRAPIDS || X86_NATIVE_CPU/' arch/x86/Kconfig.cpu
 
   # Applying configuration
   cp -vf CONFIGS/x86_64/${_config} .config
