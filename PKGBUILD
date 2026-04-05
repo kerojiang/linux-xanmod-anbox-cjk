@@ -135,7 +135,7 @@ done
 sha256sums=('SKIP'
             'SKIP'
             'SKIP'
-            '6714bf3968392e29f19e44514d490ad7ec718c3897003210fd1e499017dd429d'
+            'SKIP'
             'f1c6b2c3cbaa2e50e6d30fb7e1f19b2b0d97da360854d23b08f4e5538d120f2b'
             )
 
