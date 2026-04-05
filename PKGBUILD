@@ -112,10 +112,10 @@ fi
 
 
 options=('!strip')
-_srcname="linux-${pkgver}-xanmod${xanmod}"
+_srcname="linux-${pkgver}-x64v3-xanmod${xanmod}"
 
 source=("https://cdn.kernel.org/pub/linux/kernel/v${_branch}/linux-${_major}.tar."{xz,sign}
-        "patch-${pkgver}-xanmod${xanmod}${_revision}.xz::https://sourceforge.net/projects/xanmod/files/releases/${_sf_branch}/${pkgver}-xanmod${xanmod}/patch-${pkgver}-xanmod${xanmod}.xz/download"
+        "patch-${pkgver}-x64v3-xanmod${xanmod}${_revision}.xz::https://sourceforge.net/projects/xanmod/files/releases/${_sf_branch}/${pkgver}-x64v3-xanmod${xanmod}/patch-${pkgver}-x64v3-xanmod${xanmod}.xz/download"
         "https://raw.githubusercontent.com/bigshans/cjktty-patches/master/v${_branch}/cjktty-${_cjk_major}.patch"
         choose-gcc-optimization.sh
 )
@@ -147,7 +147,7 @@ prepare() {
   cd linux-${_major}
 
   # Apply Xanmod patch
-  patch -Np1 -i ../patch-${pkgver}-xanmod${xanmod}${_revision}
+  patch -Np1 -i ../patch-${pkgver}-x64v3-xanmod${xanmod}${_revision}
 
   msg2 "Setting version..."
   echo "-$pkgrel" > localversion.10-pkgrel
