@@ -50,9 +50,9 @@ if [ "${_compiler}" = "clang" ]; then
 fi
 
 # Choose between the 4 main configs for stable branch. Default x86-64-v1 which use CONFIG_GENERIC_CPU2:
-# Possible values: config_x86-64-v1 (default) / config_x86-64-v2 / config_x86-64-v3 / config_x86-64-v4
+# Possible values: config_x86-64-v1 / config_x86-64-v2 (default) / config_x86-64-v3
 # This will be overwritten by selecting any option in microarchitecture script
-# Source files: https://github.com/xanmod/linux/tree/5.17/CONFIGS/xanmod/gcc
+# Source files: https://gitlab.com/xanmod/linux/-/tree/6.12/CONFIGS/xanmod/gcc?ref_type=heads
 #if [ -z ${_config+x} ]; then
   _config=config
 #fi
@@ -82,18 +82,18 @@ fi
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-xanmod-anbox-cjk
-_major=6.19
-pkgver=${_major}.13
-_branch=6.x
+_major=7.0
+pkgver=${_major}.2
+_branch=7.x
 xanmod=1
 _revision=
 _sf_branch=main
-_cjk_major=6.19
+_cjk_major=7.0
 pkgrel=${xanmod}
-pkgdesc='Linux Xanmod - Rolling Release'
+pkgdesc='Linux Xanmod - Stable Mainline [MAIN]'
 url="http://www.xanmod.org/"
 arch=(x86_64)
-license=(GPL2)
+license=(GPL-2.0-only)
 makedepends=(
   bc
   cpio
@@ -102,12 +102,15 @@ makedepends=(
   pahole
   perl
   python
+  rust
+  rust-bindgen
+  rust-src
   tar
   xz
 )
 
 if [ "${_compiler}" = "clang" ]; then
-  makedepends+=(clang llvm lld python)
+  makedepends+=(clang llvm lld)
 fi
 
 
@@ -136,7 +139,7 @@ sha256sums=('SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
-            'f1c6b2c3cbaa2e50e6d30fb7e1f19b2b0d97da360854d23b08f4e5538d120f2b'
+            'f4acc1760990c54348a029315d1505ccb7c7270cd70a9aeb728bffcced51e767'
             )
 
 export KBUILD_BUILD_HOST=${KBUILD_BUILD_HOST:-archlinux}
