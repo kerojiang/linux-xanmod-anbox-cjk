@@ -88,7 +88,7 @@ _branch=7.x
 xanmod=1
 _revision=
 _sf_branch=main
-_cjk_major=7.0
+_cjk_major=7.0.7
 pkgrel=${xanmod}
 pkgdesc='Linux Xanmod - Stable Mainline [MAIN]'
 url="http://www.xanmod.org/"
@@ -148,6 +148,12 @@ export KBUILD_BUILD_TIMESTAMP=${KBUILD_BUILD_TIMESTAMP:-$(date -Ru${SOURCE_DATE_
 
 prepare() {
   cd linux-${_major}
+
+  # Remove files that Xanmod patch would create (already exist in kernel ${_major})
+  rm -f tools/testing/selftests/rseq/check_optimized.c \
+        tools/testing/selftests/rseq/legacy_check.c \
+        tools/testing/selftests/rseq/run_legacy_check.sh \
+        tools/testing/selftests/rseq/run_timeslice_test.sh
 
   # Apply Xanmod patch
   patch -Np1 -i ../patch-${pkgver}-xanmod${xanmod}${_revision}
