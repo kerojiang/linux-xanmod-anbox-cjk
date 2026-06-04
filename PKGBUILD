@@ -21,7 +21,7 @@ fi
 CONFIG_ASHMEM=m
 CONFIG_ANDROID=y
 CONFIG_ANDROID_BINDER_IPC=m
-CONFIG_ANDROID_BINDERFS=n
+CONFIG_ANDROID_BINDERFS=y
 CONFIG_ANDROID_BINDER_DEVICES="binder,hwbinder,vndbinder"
 
 #_compiler=clang
@@ -83,7 +83,7 @@ fi
 
 pkgbase=linux-xanmod-anbox-cjk
 _major=7.0
-pkgver=${_major}.10
+pkgver=${_major}.11
 _branch=7.x
 xanmod=1
 _revision=
