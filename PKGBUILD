@@ -88,7 +88,7 @@ _branch=7.x
 xanmod=1
 _revision=
 _sf_branch=main
-_cjk_major=7.0.7
+_cjk_major=7.1
 pkgrel=${xanmod}
 pkgdesc='Linux Xanmod - Stable Mainline [MAIN]'
 url="http://www.xanmod.org/"
@@ -119,7 +119,7 @@ _srcname="linux-${pkgver}-xanmod${xanmod}"
 
 source=("https://cdn.kernel.org/pub/linux/kernel/v${_branch}/linux-${_major}.tar."{xz,sign}
         "patch-${pkgver}-xanmod${xanmod}${_revision}.xz::https://sourceforge.net/projects/xanmod/files/releases/${_sf_branch}/${pkgver}-xanmod${xanmod}/patch-${pkgver}-xanmod${xanmod}.xz/download"
-        "https://raw.githubusercontent.com/kerojiang/cjktty-patches/master/v${_branch}/cjktty-${_cjk_major}.patch"
+        "https://raw.githubusercontent.com/bigshans/cjktty-patches/master/v${_branch}/cjktty-${_cjk_major}.patch"
         choose-gcc-optimization.sh
 )
 
