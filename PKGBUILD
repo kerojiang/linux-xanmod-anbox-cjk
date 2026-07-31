@@ -18,11 +18,13 @@ if [ -z ${_microarchitecture+x} ]; then
   _microarchitecture=14
 fi
 
-CONFIG_ASHMEM=m
-CONFIG_ANDROID=y
-CONFIG_ANDROID_BINDER_IPC=m
-CONFIG_ANDROID_BINDERFS=y
-CONFIG_ANDROID_BINDER_DEVICES="binder,hwbinder,vndbinder"
+# Anbox/Waydroid kernel options are applied inside prepare() via scripts/config:
+#   CONFIG_ANDROID_BINDER_IPC=y
+#   CONFIG_ANDROID_BINDERFS=y
+#   CONFIG_ANDROID_BINDER_DEVICES="binder,hwbinder,vndbinder"
+# (Note: CONFIG_ASHMEM and CONFIG_ANDROID no longer exist in kernel 7.x -
+#  the staging android driver including ashmem was removed upstream.
+#  Waydroid / current anbox use binderfs and do not need ashmem.)
 
 #_compiler=clang
 
@@ -49,13 +51,13 @@ if [ "${_compiler}" = "clang" ]; then
   _compiler_flags="CC=clang HOSTCC=clang LLVM=1 LLVM_IAS=1"
 fi
 
-# Choose between the 4 main configs for stable branch. Default x86-64-v1 which use CONFIG_GENERIC_CPU2:
-# Possible values: config_x86-64-v1 / config_x86-64-v2 (default) / config_x86-64-v3
+# Choose the base config file: CONFIGS/x86_64/<_config>.
+# For 7.1 the xanmod 7.1 branch ships a single config named "config"
+# Source files: https://gitlab.com/xanmod/linux/-/tree/7.1/CONFIGS/x86_64?ref_type=heads
 # This will be overwritten by selecting any option in microarchitecture script
-# Source files: https://gitlab.com/xanmod/linux/-/tree/6.12/CONFIGS/xanmod/gcc?ref_type=heads
-#if [ -z ${_config+x} ]; then
+if [ -z ${_config+x} ]; then
   _config=config
-#fi
+fi
 
 # Compress modules with ZSTD (to save disk space)
 if [ -z ${_compress_modules+x} ]; then
@@ -135,10 +137,12 @@ for _patch in ${_patches[@]}; do
     source+=("${_patch}::https://raw.githubusercontent.com/archlinux/svntogit-packages/${_commit}/trunk/${_patch}")
 done
 
+# sha256sums: kernel tarball + its .sign are verified via validpgpkeys above (SKIP).
+# xanmod / cjktty patches are pinned by hash so upstream changes cannot break the build.
 sha256sums=('SKIP'
             'SKIP'
-            'SKIP'
-            'SKIP'
+            '72f1fd755581ae24793c1d6a1721ea902172bebb89d2014977076595f6e059dc'
+            '8b761e544767ad196c2119f76194c1459ddd859c81f72f32ee5a107a187c2e0f'
             'f4acc1760990c54348a029315d1505ccb7c7270cd70a9aeb728bffcced51e767'
             )
 
@@ -184,27 +188,26 @@ prepare() {
     scripts/config --disable LTO_CLANG_FULL
     scripts/config --enable LTO_CLANG_THIN
   fi
-  _LLVM=1
-
-  scripts/config --module  CONFIG_ASHMEM
-  scripts/config --enable  CONFIG_ANDROID
+  # Anbox/Waydroid support: binder must be built-in so binder nodes exist at boot
+  # (CONFIG_ASHMEM / CONFIG_ANDROID were removed upstream in kernel 7.x, so
+  #  only the binder options below are applied. STACK_VALIDATION is also dropped:
+  #  since 7.x it depends on UNWINDER_FRAME_POINTER, while the xanmod config uses
+  #  the ORC unwinder, so --enable would be silently reset by olddefconfig.)
   scripts/config --enable  CONFIG_ANDROID_BINDER_IPC
   scripts/config --enable  CONFIG_ANDROID_BINDERFS
-  scripts/config --set-str CONFIG_ANDROID_BINDER_DEVICES ""
-  # CONFIG_STACK_VALIDATION gives better stack traces. Also is enabled in all official kernel packages by Archlinux team
-  scripts/config --enable CONFIG_STACK_VALIDATION
+  scripts/config --set-str CONFIG_ANDROID_BINDER_DEVICES "binder,hwbinder,vndbinder"
 
   # Enable IKCONFIG following Arch's philosophy
   scripts/config --enable CONFIG_IKCONFIG \
                  --enable CONFIG_IKCONFIG_PROC
 
   # User set. See at the top of this file
-  if [ "$use_tracers" = "y" ]; then
-    msg2 "Enabling CONFIG_FTRACE only if we are not compiling with clang..."
+  if [ "$use_tracers" = "n" ]; then
+    msg2 "Disabling CONFIG_FTRACE (use_tracers=n, only when compiling with gcc)..."
     if [ "${_compiler}" = "gcc" ] || [ "${_compiler}q" = "q" ]; then
-      scripts/config --enable CONFIG_FTRACE \
-                     --enable CONFIG_FUNCTION_TRACER \
-                     --enable CONFIG_STACK_TRACER
+      scripts/config --disable CONFIG_FTRACE \
+                     --disable CONFIG_FUNCTION_TRACER \
+                     --disable CONFIG_STACK_TRACER
     fi
   fi
 
@@ -333,11 +336,14 @@ _package-headers() {
   cp -t "$builddir" -a scripts
   ln -srt "$builddir" "$builddir/scripts/gdb/vmlinux-gdb.py"
 
-  # add objtool for external module building and enabled VALIDATION_STACK option
+  # add objtool for external module building (required by the ORC unwinder)
   install -Dt "$builddir/tools/objtool" tools/objtool/objtool
   
   # required when DEBUG_INFO_BTF_MODULES is enabled
   if [ -f "tools/bpf/resolve_btfids/resolve_btfids" ]; then install -Dt "$builddir/tools/bpf/resolve_btfids" tools/bpf/resolve_btfids/resolve_btfids ; fi
+
+  # add bpftool for external module building (built in build())
+  if [ -f "tools/bpf/bpftool/bpftool" ]; then install -Dt "$builddir/tools/bpf/bpftool" tools/bpf/bpftool/bpftool ; fi
 
   # add xfs and shmem for aufs building
   mkdir -p "$builddir"/{fs/xfs,mm}
