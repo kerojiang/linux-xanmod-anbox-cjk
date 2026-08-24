@@ -85,7 +85,7 @@ fi
 
 pkgbase=linux-xanmod-anbox-cjk
 _major=7.1
-pkgver=${_major}.5
+pkgver=${_major}.9
 _branch=7.x
 xanmod=1
 _revision=
@@ -141,7 +141,7 @@ done
 # xanmod / cjktty patches are pinned by hash so upstream changes cannot break the build.
 sha256sums=('SKIP'
             'SKIP'
-            '72f1fd755581ae24793c1d6a1721ea902172bebb89d2014977076595f6e059dc'
+            '2d440d7bf63cfc194ea5ca84b9d5635dcfe5c63626fdaaf021f13b77f55470eb'
             '8b761e544767ad196c2119f76194c1459ddd859c81f72f32ee5a107a187c2e0f'
             'f4acc1760990c54348a029315d1505ccb7c7270cd70a9aeb728bffcced51e767'
             )
