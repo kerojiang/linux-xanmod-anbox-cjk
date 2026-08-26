@@ -85,7 +85,7 @@ fi
 
 pkgbase=linux-xanmod-anbox-cjk
 _major=7.1
-pkgver=${_major}.9
+pkgver=${_major}.10
 _branch=7.x
 xanmod=1
 _revision=
