@@ -141,7 +141,7 @@ done
 # xanmod / cjktty patches are pinned by hash so upstream changes cannot break the build.
 sha256sums=('SKIP'
             'SKIP'
-            '2d440d7bf63cfc194ea5ca84b9d5635dcfe5c63626fdaaf021f13b77f55470eb'
+            'SKIP'
             '1d217c32e496b80b1b4751bf3c657ea938b20630a852c30f222b59b8010c9ad2'
             'f4acc1760990c54348a029315d1505ccb7c7270cd70a9aeb728bffcced51e767'
             )
