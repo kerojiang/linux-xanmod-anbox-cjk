@@ -84,13 +84,13 @@ fi
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-xanmod-anbox-cjk
-_major=7.1
-pkgver=${_major}.10
+_major=7.2
+pkgver=${_major}.4
 _branch=7.x
 xanmod=1
 _revision=
 _sf_branch=main
-_cjk_major=7.1
+_cjk_major=7.2
 pkgrel=${xanmod}
 pkgdesc='Linux Xanmod - Stable Mainline [MAIN]'
 url="http://www.xanmod.org/"
@@ -121,7 +121,7 @@ _srcname="linux-${pkgver}-xanmod${xanmod}"
 
 source=("https://cdn.kernel.org/pub/linux/kernel/v${_branch}/linux-${_major}.tar."{xz,sign}
         "patch-${pkgver}-xanmod${xanmod}${_revision}.xz::https://sourceforge.net/projects/xanmod/files/releases/${_sf_branch}/${pkgver}-xanmod${xanmod}/patch-${pkgver}-xanmod${xanmod}.xz/download"
-        "https://raw.githubusercontent.com/kerojiang/cjktty-patches/master/v${_branch}/cjktty-${_cjk_major}.patch"
+        "https://raw.githubusercontent.com/gentoo-zh/cjktty-patches/master/v${_branch}/cjktty-${_cjk_major}.patch"
         choose-gcc-optimization.sh
 )
 
@@ -142,7 +142,7 @@ done
 sha256sums=('SKIP'
             'SKIP'
             'SKIP'
-            '1d217c32e496b80b1b4751bf3c657ea938b20630a852c30f222b59b8010c9ad2'
+            '9f4e207c949d63b077e2ce536c05fb4093bd5529ce66bf7214d642c32117d35c'
             'f4acc1760990c54348a029315d1505ccb7c7270cd70a9aeb728bffcced51e767'
             )
 
